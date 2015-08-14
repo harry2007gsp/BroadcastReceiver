@@ -24,16 +24,15 @@ public class MainActivity extends ActionBarActivity {
         TextView text = (TextView) findViewById(R.id.text);
         text.setText("Battery is: 16%");
 
-        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_LOW);
-        IntentFilter intentFilter2 = new IntentFilter("com.test.training");
+//        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        //        MyReceiver myReceiver = new MyReceiver();
+//        this.registerReceiver(myReceiver, intentFilter);
+
+//        IntentFilter intentFilter2 = new IntentFilter("com.test.training");
+//        MyReceiver2 myReceiver2 = new MyReceiver2();
+        this.registerReceiver(new MyReceiver2(), new IntentFilter("com.test.training"));
+
 //        IntentFilter intentFilter3 = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-
-
-        MyReceiver myReceiver = new MyReceiver();
-        this.registerReceiver(myReceiver, intentFilter);
-        MyReceiver2 myReceiver2 = new MyReceiver2();
-        this.registerReceiver(myReceiver2, intentFilter2);
-
 //        MyReceiver3 receiver3 = new MyReceiver3();
 //        this.registerReceiver(receiver3, intentFilter3);
     }
@@ -41,24 +40,25 @@ public class MainActivity extends ActionBarActivity {
     public void br(View view) {
         Intent intent = new Intent();
         intent.setAction("com.test.training");
-        intent.putExtra("int", 5);
-        sendStickyBroadcast(intent);
+        intent.putExtra("int", 7);
+        sendBroadcast(intent);
+//        sendStickyBroadcast(intent);
     }
 
 
-    class MyReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Toast.makeText(MainActivity.this, "LOW level", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    class MyReceiver extends BroadcastReceiver {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            Toast.makeText(MainActivity.this, "LOW level", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     class MyReceiver2 extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             int t = intent.getIntExtra("int",0);
-//            Toast.makeText(MainActivity.this, "CHANGED level: "+t, Toast.LENGTH_SHORT).show();
-            Log.d("training", "changed level: " + t);
+            Toast.makeText(MainActivity.this, "CHANGED level: "+t, Toast.LENGTH_SHORT).show();
+//            Log.d("training", "changed level: " + t);
         }
     }
 }
