@@ -16,6 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--this IntentFilter is not working as this is system intent action which needs to be declared in java-->
         <!--<receiver-->
             <!--android:enabled="true"-->
             <!--android:exported="true"-->
@@ -24,9 +25,14 @@
                 <!--<action android:name="android.intent.action.BATTERY_LOW"/>-->
             <!--</intent-filter>-->
         <!--</receiver>-->
+
+        <!--One thing to be noticed that BR works for registered IntentFilters in Manifest file -->
+        <!--only for that case where IntentFilter is customized and not from system-->
+        <!--if we wanna use system Action Intents in IntentFilters then register BR with that IntentFilter-->
+        <!--in the java code dynamically-->
         <receiver android:name="MyReceiver3" >
             <intent-filter>
-                <action android:name="android.intent.action.BATTERY_CHANGED" />
+                <action android:name="com.test.training" />
             </intent-filter>
         </receiver>
     </application>
